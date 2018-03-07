@@ -1,0 +1,62 @@
+<%= form_with(model: project, local: true) do |form| %>
+  <% if project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% project.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :project_name %>
+    <%= form.text_field :project_name, id: :project_project_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address, id: :project_address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :latitude %>
+    <%= form.text_field :latitude, id: :project_latitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :longitude %>
+    <%= form.text_field :longitude, id: :project_longitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :buildings_assignment %>
+    <%= form.text_field :buildings_assignment, id: :project_buildings_assignment %>
+  </div>
+
+  <div class="field">
+    <%= form.label :building_type %>
+    <%= form.text_field :building_type, id: :project_building_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :project_status %>
+    <%= form.text_field :project_status, id: :project_project_status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.text_field :date, id: :project_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :impact %>
+    <%= form.number_field :impact, id: :project_impact %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
