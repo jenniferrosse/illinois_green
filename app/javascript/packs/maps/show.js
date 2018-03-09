@@ -1,37 +1,30 @@
-document.addEventListener("turbolinks:load", function() {
-  
-  var map = new GMaps({
-    div: '#map',
+function setupShowMap(element) {
+  var map2 = new GMaps({
+    div: element,
     lat: 41.8781,
-    lng: -87.6298
+    lng: -87.6298,
+    maxZoom: 12
   });
-  window.map = map;
+  window.map2 = map2;
 
 //projects substituted for markers
-  var project = JSON.parse(document.querySelector("#map").dataset.project);
-  window.projects = projects;
+  var project = JSON.parse(element.dataset.project);
+  window.project = project;
 
-  project do (function(project) {
     if (project.latitude && project.longitude) {
-      var marker = map.addMarker({
+      var marker = map2.addMarker({
         lat: project.latitude,
         lng: project.longitude,
-        title: project.address,
-        infoWindow: {
-          content: '<a href="/projects/' + project.id + '">' + project.address + '</a>' + '<br>' + project.project_status + '<br>' + project.buildings_assignment
-        }
+        title: project.address
       });
-    } 
-  });
+    }
 
-  map.fitZoom();
+  map2.fitZoom();
+}
 
-  document.querySelector("#redo-search").addEventListener("click", function(e) {
-    e.preventDefault();
-
-    var bounds = map.getBounds();
-    var location = bounds.getSouthWest().toUrlValue() + "," + bounds.getNorthEast().toUrlValue();
-
-    Turbolinks.visit(`/projects?l=${location}`);
-  });
+document.addEventListener("turbolinks:load", function() {
+  var element = document.querySelector('#map_show')
+  if (element) {
+    setupShowMap(element)
+  }
 });

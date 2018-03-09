@@ -52,7 +52,7 @@
     </div>
     </div>
     <div class="col-md-6">
-      <%= tag.div nil, id: 'map', data: { projects: @projects.to_json(methods: [:address]), l: params[:l] } %>
+      <%= tag.div nil, id: 'map_show', data: { project: @project.to_json } %>
     </div>
   </div>
 

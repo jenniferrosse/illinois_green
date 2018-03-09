@@ -10,3 +10,4 @@
 console.log('Hello World from Illinois Green!')
 
 require('./maps')
+require('./maps/show')

@@ -1,14 +1,13 @@
-document.addEventListener("turbolinks:load", function() {
-  
+function setupIndexMap(element) {
   var map = new GMaps({
-    div: '#map',
+    div: element,
     lat: 41.8781,
     lng: -87.6298
   });
   window.map = map;
 
 //projects substituted for markers
-  var projects = JSON.parse(document.querySelector("#map").dataset.projects);
+  var projects = JSON.parse(element.dataset.projects);
   window.projects = projects;
 
   projects.forEach(function(project) {
@@ -34,4 +33,11 @@ document.addEventListener("turbolinks:load", function() {
 
     Turbolinks.visit(`/projects?l=${location}`);
   });
+}
+
+document.addEventListener("turbolinks:load", function() {
+  var element = document.querySelector('#map')
+  if (element) {
+    setupIndexMap(element)
+  }
 });
