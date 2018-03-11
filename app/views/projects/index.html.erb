@@ -1,6 +1,12 @@
 <div class="container-fluid">
   <p id="notice"><%= notice %></p>
 
+
+<%= form_tag import_projects_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+
   <div class="row">
     <div class="col-md-4">
       <div class="map-content">

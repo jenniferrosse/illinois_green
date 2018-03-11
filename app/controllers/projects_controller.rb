@@ -15,6 +15,11 @@ class ProjectsController < ApplicationController
                 end           
   end
 
+  def import
+    Project.import(params[:file])
+    redirect_to root_url, notice: "Projects imported."
+  end
+
   # GET /projects/1
   # GET /projects/1.json
   def show
