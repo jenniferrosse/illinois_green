@@ -6,7 +6,6 @@
   <table>
     <thead>
       <tr>
-        <th>Name</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -14,8 +13,7 @@
     <tbody>
       <% @partners.each do |partner| %>
         <tr>
-          <td><%= partner.name %></td>
-          <td><%= link_to 'Show', partner %></td>
+          <td><h5><%= link_to partner.name, partner, class: "green_link" %></h5></td>
           <td><%= link_to 'Edit', edit_partner_path(partner) %></td>
           <td><%= link_to 'Delete', partner, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
