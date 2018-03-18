@@ -22,16 +22,6 @@
   </div>
 
   <div class="field">
-    <%= form.label :latitude %>
-    <%= form.text_field :latitude, id: :project_latitude %>
-  </div>
-
-  <div class="field">
-    <%= form.label :longitude %>
-    <%= form.text_field :longitude, id: :project_longitude %>
-  </div>
-
-  <div class="field">
     <%= form.label :buildings_assignment %>
     <%= form.text_field :buildings_assignment, id: :project_buildings_assignment %>
   </div>
@@ -54,6 +44,18 @@
   <div class="field">
     <%= form.label :impact %>
     <%= form.number_field :impact, id: :project_impact %>
+  </div>
+
+  <div class="field">
+    <%= form.label :project_type %><br>
+    <%= form.collection_select :project_type_id, ProjectType.all, :id, :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :partner %><br>
+    <%= form.collection_check_boxes(:partner_ids, Partner.all, :id, :name) do |partner| %>
+      <%= partner.label { partner.check_box + partner.text } %>
+    <% end %>
   </div>
 
   <div class="actions">

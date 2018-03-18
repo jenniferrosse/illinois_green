@@ -9,15 +9,21 @@
         <br>
       <% @projects.each do |project| %>
       <p>
-        <h5><%= project.address %></h5>
-        <%= project.buildings_assignment %><br>
-        <%= project.project_status %><br>
-        <%= project.building_type %><br>
-        <%= project.date %><br>
-        <%= project.impact %>
-        <%= link_to 'Show', project %> |
+        <h5><%= link_to project.address, project, class: "green_link" %></h5>
+        <strong>Buildings Assignment:</strong> <%= project.buildings_assignment %><br>
+        <strong>Status:</strong> <%= project.project_status %><br>
+       <strong>Building Type:</strong> <%= project.building_type %><br>
+        <strong>Project Date:</strong> <%= project.date %><br>
+        <strong>Impact:</strong> <%= project.impact %><br>
+        <strong>Project Type:</strong> <% if project.project_type.present? %><%= project.project_type.name %><% end %><br>
+        <strong>Project Partner:</strong> 
+          <% if project.partners.any? %>
+            <% project.partners.each do |partner| %>
+            <%= partner.name %> 
+            <% end %>
+          <% end %><br>
         <%= link_to 'Edit', edit_project_path(project) %> |
-        <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?' } %>
         <hr>
         </p>
         <% end %>

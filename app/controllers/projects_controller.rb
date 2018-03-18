@@ -23,6 +23,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @partners = @project.partners
   end
 
   # GET /projects/new
@@ -37,7 +38,7 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(project_params)
+    @project = Project.new(project_params, params[:partner_id])
 
     respond_to do |format|
       if @project.save
@@ -82,6 +83,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:project_name, :address, :latitude, :longitude, :buildings_assignment, :building_type, :project_status, :date, :impact)
+      params.require(:project).permit(:project_name, :address, :latitude, :longitude, :buildings_assignment, :building_type, :project_status, :date, :impact, :project_type_id, partner_ids: [], project_partner_attributes: [:id] )
     end
 end

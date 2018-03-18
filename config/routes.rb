@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :partners
+  resources :project_partners
+  resources :project_types
   root 'projects#index'
 
   resources :projects do

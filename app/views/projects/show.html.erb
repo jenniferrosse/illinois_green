@@ -1,26 +1,12 @@
  <div class="container"> 
     <p id="notice"><%= notice %></p>
+    <br> 
+    <br> 
+    <br> 
   <div class="row">
     <div class="col-md-6">
-      <p>
-        <strong>Project name:</strong>
-        <%= @project.project_name %>
-      </p>
 
-      <p>
-        <strong>Address:</strong>
-        <%= @project.address %>
-      </p>
-
-      <p>
-        <strong>Latitude:</strong>
-        <%= @project.latitude %>
-      </p>
-
-      <p>
-        <strong>Longitude:</strong>
-        <%= @project.longitude %>
-      </p>
+      <h3><%= @project.address %></h3>
 
       <p>
         <strong>Buildings assignment:</strong>
@@ -46,10 +32,25 @@
         <strong>Impact:</strong>
         <%= @project.impact %>
       </p>
+      
+      <p>
+        <strong>Project Type:</strong>
+         <% if @project.project_type.present? %><%= @project.project_type.name %><% end %>
+      </p>
 
+      <p>
+        <strong>Project Partner:</strong>
+          <% if @project.partners.any? %>
+            <% @partners.each_with_index do |partner, index| %>
+              <%= partner.name %>
+              <%= "," unless @partners.size==index+1 %>
+            <% end %> 
+          <% end %>
+      </p>
+
+      <hr>
       <%= link_to 'Edit', edit_project_path(@project) %> |
       <%= link_to 'Back', projects_path %>
-    </div>
     </div>
     <div class="col-md-6">
       <%= tag.div nil, id: 'map_show', data: { project: @project.to_json } %>

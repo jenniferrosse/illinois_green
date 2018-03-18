@@ -1,5 +1,9 @@
 class Project < ApplicationRecord
 
+  belongs_to :project_type, optional: true
+  has_many :project_partners
+  has_many :partners, :through => :project_partners
+
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?
 

@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180208165527) do
+ActiveRecord::Schema.define(version: 20180317234311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "partners", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+  end
+
+  create_table "project_partners", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "project_id"
+    t.bigint "partner_id"
+    t.index ["partner_id"], name: "index_project_partners_on_partner_id"
+    t.index ["project_id"], name: "index_project_partners_on_project_id"
+  end
+
+  create_table "project_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string "project_name"
@@ -27,6 +48,11 @@ ActiveRecord::Schema.define(version: 20180208165527) do
     t.integer "impact"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "project_type_id"
+    t.index ["project_type_id"], name: "index_projects_on_project_type_id"
   end
 
+  add_foreign_key "project_partners", "partners"
+  add_foreign_key "project_partners", "projects"
+  add_foreign_key "projects", "project_types"
 end

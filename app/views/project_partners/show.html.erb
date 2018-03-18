@@ -1,0 +1,10 @@
+<div class="container">
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <%= @project_partner.id %>, <%= @project_partner.project_id %>
+  </p>
+
+  <%= link_to 'Edit', edit_project_partner_path(@project_partner) %> |
+  <%= link_to 'Back', project_partners_path %>
+</div>
