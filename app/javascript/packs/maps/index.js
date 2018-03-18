@@ -17,7 +17,7 @@ function setupIndexMap(element) {
         lng: project.longitude,
         title: project.address,
         infoWindow: {
-          content: '<a href="/projects/' + project.id + '">' + project.address + '</a>' + '<br>' + project.project_status + '<br>' + project.buildings_assignment
+          content: '<strong><a href="/projects/' + project.id + '">' + project.address + '</a></strong>' + '<br>' + '<strong>Status: </strong>' + project.project_status + '<br>' + '<strong>Buildings Assignment: </strong>' + project.buildings_assignment + '<br>' + '<strong>Building Type: </strong>' + project.building_type + '<br>' + '<strong>Project Date: </strong>' + project.date + '<br>' + '<strong>Impact: </strong>' + project.impact + '<br>' + '<strong>Project Type: </strong>' + project.project_type
         }
       });
     } 
