@@ -15,7 +15,10 @@ function setupShowMap(element) {
       var marker = map2.addMarker({
         lat: project.latitude,
         lng: project.longitude,
-        title: project.address
+        title: project.address,
+        infoWindow: {
+          content: '<strong>' + project.address + '</strong>' + '<br>' + '<strong>Status: </strong>' + project.project_status + '<br>' + '<strong>Buildings Assignment: </strong>' + project.buildings_assignment + '<br>' + '<strong>Building Type: </strong>' + project.building_type + '<br>' + '<strong>Project Date: </strong>' + project.date + '<br>' + '<strong>Impact: </strong>' + project.impact + '<br>' + '<strong>Project Type: </strong>' + project.project_type
+        }
       });
     }
 

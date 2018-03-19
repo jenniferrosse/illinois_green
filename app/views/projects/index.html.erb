@@ -1,43 +1,48 @@
 <div class="container-fluid">
   <p id="notice"><%= notice %></p>
 
-   <div id="map_page">
+    <button type="button" class="btn btn-outline-success">Project Partner</button>
+    <button type="button" class="btn btn-outline-success">Project Status</button>
+    <button type="button" class="btn btn-outline-success">Project Status</button>
+    <button type="button" class="btn btn-outline-success"># of People Impacted</button>
+    <br>
+    <br>
     <h1>Projects</h1>
-    <br>
-    <br>
-     <div class="row">
-      <div id="sidebar" class="col-md-4 ">
-        <br>
-      <% @projects.each do |project| %>
+
+
+   <div class="row">
+    <div id="sidebar" class="col-md-4 ">
+
+    <% @projects.each do |project| %>
+    <p>
+      <h5><%= link_to project.address, project, class: "green_link" %></h5>
+      <strong>Buildings Assignment:</strong> <%= project.buildings_assignment %><br>
+      <strong>Status:</strong> <%= project.project_status %><br>
+     <strong>Building Type:</strong> <%= project.building_type %><br>
+      <strong>Project Date:</strong> <%= project.date %><br>
+      <strong>Impact:</strong> <%= project.impact %><br>
+      <strong>Project Type:</strong> <% if project.project_type.present? %><%= project.project_type.name %><% end %><br>
+      <strong>Project Partner:</strong> 
+        <% if project.partners.any? %>
+          <% project.partners.each do |partner| %>
+          <%= partner.name %> 
+          <% end %>
+        <% end %><br>
+      <%= link_to 'Edit', edit_project_path(project) %> |
+      <%= link_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <hr>
+      </p>
+      <% end %>
+      <%= form_tag import_projects_path, multipart: true do %>
+        <%= file_field_tag :file %>
+        <%= submit_tag "Import" %>
+      <% end %>
       <p>
-        <h5><%= link_to project.address, project, class: "green_link" %></h5>
-        <strong>Buildings Assignment:</strong> <%= project.buildings_assignment %><br>
-        <strong>Status:</strong> <%= project.project_status %><br>
-       <strong>Building Type:</strong> <%= project.building_type %><br>
-        <strong>Project Date:</strong> <%= project.date %><br>
-        <strong>Impact:</strong> <%= project.impact %><br>
-        <strong>Project Type:</strong> <% if project.project_type.present? %><%= project.project_type.name %><% end %><br>
-        <strong>Project Partner:</strong> 
-          <% if project.partners.any? %>
-            <% project.partners.each do |partner| %>
-            <%= partner.name %> 
-            <% end %>
-          <% end %><br>
-        <%= link_to 'Edit', edit_project_path(project) %> |
-        <%= link_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?' } %>
-        <hr>
-        </p>
-        <% end %>
-        <%= form_tag import_projects_path, multipart: true do %>
-          <%= file_field_tag :file %>
-          <%= submit_tag "Import" %>
-        <% end %>
-        <p>
-          <%= link_to 'New Project', new_project_path %>
-        </p>
-      </div>
-      <%= tag.div nil, class: 'col-md-8 ml-auto', id: 'map', data: { projects: @projects.to_json(methods: [:address]), l: params[:l] } %>
+        <%= link_to 'New Project', new_project_path %>
+      </p>
     </div>
+    <%= tag.div nil, class: 'col-md-8 ml-auto', id: 'map', data: { projects: @projects.to_json(methods: [:address]), l: params[:l] } %>
   </div>
 </div>
+
 
